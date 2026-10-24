@@ -28,8 +28,11 @@ and **recent revenue**, all pulled from the official Steamworks APIs.
 
 ## Install
 
-1. Build the APK (below) or install `app/build/outputs/apk/debug/app-debug.apk` on your phone
-   (`adb install app-debug.apk`, or copy it over and open it).
+1. Download the APK from the [Releases](https://github.com/sancaralp/Steam-Data-Android-Widget/releases)
+   page (or build it yourself, see below) and install it on your phone: open the file on the
+   phone, or run `adb install SteamDataWidget-1.0.apk` from a computer with USB debugging enabled.
+   The release APK is signed with a development certificate, so Android shows the usual
+   "unknown source" confirmation.
 2. Long-press your home screen, choose **Widgets**, and add **Steam Data Widget**.
    The settings screen opens: paste your two keys and tap **Save**. The app also has an
    **Add widget to home screen** button; it works on launchers that support pin requests
