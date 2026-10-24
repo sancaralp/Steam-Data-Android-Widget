@@ -30,7 +30,7 @@ class SteamWidgetProvider : AppWidgetProvider() {
     }
 
     override fun onDisabled(context: Context) {
-        Scheduler.cancelAll(context)
+        if (!Widgets.anyPresent(context)) Scheduler.cancelAll(context)
     }
 
     override fun onReceive(context: Context, intent: Intent) {

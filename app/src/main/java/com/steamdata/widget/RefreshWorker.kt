@@ -31,14 +31,15 @@ class RefreshWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ct
         try {
             state.busy = true
             state.progress = null
-            SteamWidgetProvider.updateAll(ctx)
+            Widgets.updateAll(ctx)
             Refresher(
                 ctx,
                 onProgress = { text ->
                     state.progress = text
                     SteamWidgetProvider.updateStatus(ctx)
+                    GameWidgetProvider.updateAll(ctx)
                 },
-                onData = { SteamWidgetProvider.updateAll(ctx) },
+                onData = { Widgets.updateAll(ctx) },
                 onLongRun = {
                     // Lifts the 10-minute background limit while the first wishlist history downloads.
                     try {
@@ -56,7 +57,7 @@ class RefreshWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ct
             state.busy = false
             state.progress = null
             refreshMutex.unlock()
-            SteamWidgetProvider.updateAll(ctx)
+            Widgets.updateAll(ctx)
             Scheduler.scheduleNext(ctx)
             // Stopped by the system mid-sync: pick up where the saved history left off.
             if (isStopped) Scheduler.refreshSoon(ctx)

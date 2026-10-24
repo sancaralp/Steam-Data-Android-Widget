@@ -66,7 +66,7 @@ class SettingsActivity : AppCompatActivity() {
                 setResult(RESULT_OK, Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId))
                 finish()
             } else {
-                SteamWidgetProvider.updateAll(this)
+                Widgets.updateAll(this)
                 Toast.makeText(this, "Saved · refreshing", Toast.LENGTH_SHORT).show()
                 refreshStatus()
             }
@@ -80,7 +80,7 @@ class SettingsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_clear).setOnClickListener {
             Store.clearAll(this)
             WidgetState(this).clearForNewData()
-            SteamWidgetProvider.updateAll(this)
+            Widgets.updateAll(this)
             Toast.makeText(this, "Cached data cleared", Toast.LENGTH_SHORT).show()
             refreshStatus()
         }

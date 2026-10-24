@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Steam Data Widget</string>
-    <string name="widget_desc">Wishlists, players and revenue for your Steam games</string>
+    <string name="widget_desc">Wishlists, players and revenue for all your Steam games</string>
+    <string name="game_widget_label">Steam Game</string>
+    <string name="game_widget_desc">One game: today’s wishlists, total, players and revenue</string>
 </resources>

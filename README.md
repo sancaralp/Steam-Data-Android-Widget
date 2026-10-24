@@ -44,6 +44,24 @@ and **recent revenue**, all pulled from the official Steamworks APIs.
 You can reopen the settings any time by tapping the **Steam Stats** title on the widget or by
 opening the app from the launcher.
 
+### Compact per-game widget
+
+The widget picker also offers **Steam Game**, a small 2×2 card for a single game. When you place
+it, a list of your games appears; pick one. It shows today's net wishlist change with adds and
+deletes, total wishlists, who is playing the game and its demo right now, and the latest net
+revenue. Tapping it opens the game's Steamworks *Sales & Activations* detail page. Long-press →
+reconfigure (where the launcher supports it) switches it to another game. The layout follows the
+size you give it:
+
+| Size | Layout |
+|---|---|
+| 2×2 (default) | Card: name, today's net change with adds/deletes, total wishlists, players, revenue, status |
+| 4×2 or wider | The four summary tiles (Today, Wishlists, Players, Revenue) for this game, with the name as header |
+| 2×1 / 4×1 | Two-line strip: name, today's change, total and players |
+
+Per-game widgets share the main widget's data and refresh schedule, so adding several costs no
+extra API calls. They work without the big widget too.
+
 ## Settings
 
 | Setting | Default | Description |
