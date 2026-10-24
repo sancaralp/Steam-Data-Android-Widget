@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Steam Data Widget</string>
+    <string name="widget_desc">Wishlists, players and revenue for your Steam games</string>
+</resources>

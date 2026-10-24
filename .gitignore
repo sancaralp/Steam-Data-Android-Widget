@@ -1,4 +1,13 @@
-config.json
-data/
-__pycache__/
-*.pyc
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build/
+/app/build/
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.aab
+/ref-pc-widget/

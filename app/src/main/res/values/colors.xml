@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="win_bg">#1e1e1e</color>
+    <color name="win_border">#333333</color>
+    <color name="card_bg">#2a2a2a</color>
+    <color name="hover_bg">#2b2b2b</color>
+    <color name="sep">#383838</color>
+    <color name="btn_bg">#363636</color>
+    <color name="text">#ffffff</color>
+    <color name="body">#deddda</color>
+    <color name="dim">#9a9996</color>
+    <color name="green">#33d17a</color>
+    <color name="red">#f0566a</color>
+    <color name="blue">#4f8fe6</color>
+    <color name="purple">#c061cb</color>
+    <color name="orange">#e09a5c</color>
+    <color name="tile_green_bg">#1f3a2b</color>
+    <color name="tile_green_border">#2ec27e</color>
+    <color name="tile_blue_bg">#22304a</color>
+    <color name="tile_purple_bg">#372640</color>
+    <color name="tile_orange_bg">#3a2e24</color>
+    <color name="tile_orange_fg">#d0915e</color>
+    <color name="pill_green_bg">#1d3a29</color>
+    <color name="pill_red_bg">#3f1d24</color>
+    <color name="ic_launcher_bg">#1e1e1e</color>
+</resources>
