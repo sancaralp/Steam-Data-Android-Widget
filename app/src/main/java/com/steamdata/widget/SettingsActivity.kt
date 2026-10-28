@@ -1,10 +1,15 @@
 package com.steamdata.widget
 
+import android.annotation.SuppressLint
 import android.appwidget.AppWidgetManager
+import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -89,7 +94,32 @@ class SettingsActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.btn_pin).setOnClickListener { requestPin() }
         if (intent?.getBooleanExtra(EXTRA_PIN, false) == true) requestPin()
+        findViewById<Button>(R.id.btn_battery).setOnClickListener {
+            val i = if (isIgnoringBatteryOptimizations()) {
+                Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+            } else {
+                @SuppressLint("BatteryLife")
+                Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:$packageName"))
+            }
+            try {
+                startActivity(i)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(this, "Not available on this device", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
+    private fun requestExactAlarms() {
+        if (Build.VERSION.SDK_INT < 31) return
+        try {
+            startActivity(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM, Uri.parse("package:$packageName")))
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "Not available on this device", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun isIgnoringBatteryOptimizations(): Boolean =
+        getSystemService(PowerManager::class.java)?.isIgnoringBatteryOptimizations(packageName) == true
 
     /** Asks the launcher to place the widget (Android 8+ pin request; the launcher shows a confirmation). */
     private fun requestPin() {
@@ -118,6 +148,22 @@ class SettingsActivity : AppCompatActivity() {
         }
         val tail = Store.logTail(this)
         log.text = tail.ifEmpty { "No errors logged." }
+        val exempt = isIgnoringBatteryOptimizations()
+        findViewById<TextView>(R.id.battery_status).text = if (exempt) {
+            "Battery optimisation: off for this app. Refreshes can run on schedule while the phone sleeps."
+        } else {
+            "Battery optimisation: on. Scheduled refreshes may be delayed while the phone sleeps."
+        }
+        findViewById<Button>(R.id.btn_battery).text =
+            if (exempt) "Battery optimisation settings" else "Allow unrestricted background use"
+        val exact = Scheduler.canScheduleExact(this)
+        findViewById<TextView>(R.id.alarm_status).text = if (exact) {
+            "Exact alarms: allowed. Refreshes start on the minute."
+        } else {
+            "Exact alarms: not allowed. Each refresh may start up to about 20 minutes after its slot."
+        }
+        findViewById<Button>(R.id.btn_alarm).visibility = if (exact || Build.VERSION.SDK_INT < 31) View.GONE else View.VISIBLE
+        findViewById<Button>(R.id.btn_alarm).setOnClickListener { requestExactAlarms() }
     }
 
     private fun save(): Boolean {

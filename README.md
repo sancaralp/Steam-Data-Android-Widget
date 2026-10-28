@@ -76,6 +76,26 @@ extra API calls. They work without the big widget too.
 | Refresh every | 60 | Minutes, aligned to the clock (60 = top of every hour). Android may delay background refreshes slightly in battery saver or Doze. |
 | Day starts at | 10 | Local hour when "today" rolls over. 10 in Türkiye (UTC+3) equals midnight Pacific Daylight Time. Use 11 from November to March, or your own local equivalent. |
 
+### Background refresh on Android
+
+Refreshes are scheduled three ways: an *allow-while-idle* alarm at each clock-aligned slot (which
+still fires while the phone dozes), a periodic WorkManager job as a persistent fallback, and short
+retries (2, 5 and 10 minutes) after a run fails because Steam or the network was unreachable.
+
+Even so, Android defers background work while the phone sleeps. Two switches in the app's settings
+help: **Allow unrestricted background use** exempts the app from battery optimisation, and
+**Allow exact alarms** (Android 12+) lets each slot fire on the minute instead of within a window
+of up to about 20 minutes. Vendor layers add their own switches:
+
+| Phone | Also check |
+|---|---|
+| Xiaomi / HyperOS / MIUI | App info → Battery saver → **No restrictions**; Security app → **Autostart** on for the widget |
+| Samsung One UI | Battery → Background usage limits → make sure the app is not in **Sleeping** or **Deep sleeping apps** |
+| Huawei, OnePlus, Oppo, Realme, Vivo | App launch / battery management → manage manually, allow background activity |
+
+The widget's status line shows "offline · last data HH:MM" (or "Steam not responding") when the
+latest attempt failed; the numbers on screen are then the last good ones.
+
 **Clear cached data** in the settings deletes the downloaded wishlist history, sales, player samples and
 discovered apps. Use it when switching to a different partner account.
 

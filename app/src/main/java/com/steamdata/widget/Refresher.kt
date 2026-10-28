@@ -140,7 +140,8 @@ class Refresher(
         Store.save(wlStateFile, JSONObject().put("errors", errors).put("nodata", nodata))
     }
 
-    suspend fun run() {
+    /** Returns true when every step succeeded (false after a transient Steam or network failure). */
+    suspend fun run(): Boolean {
         setGames(games)
         try {
             discover()
@@ -208,6 +209,7 @@ class Refresher(
                 }
             }
             if (ok) state.lastUpdate = System.currentTimeMillis()
+            return ok
         } finally {
             saveWlState()
             onProgress(null)

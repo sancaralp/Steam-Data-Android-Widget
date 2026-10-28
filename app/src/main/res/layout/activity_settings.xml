@@ -156,6 +156,48 @@
             android:textColor="@color/dim"
             android:textSize="12sp" />
 
+        <TextView
+            style="@style/SettingsLabel"
+            android:text="Background refresh" />
+
+        <TextView
+            android:id="@+id/battery_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/body"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btn_battery"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Allow unrestricted background use"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/alarm_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/body"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btn_alarm"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Allow exact alarms"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Android defers background work while the phone sleeps, so without this exemption refreshes can slip by an hour or more overnight. On Xiaomi/HyperOS also set the app’s Battery saver to “No restrictions” and enable Autostart; on Samsung keep it out of “Sleeping apps”."
+            android:textColor="@color/dim"
+            android:textSize="12sp" />
+
         <Button
             android:id="@+id/btn_save"
             style="@style/Widget.AppCompat.Button.Colored"

@@ -116,6 +116,10 @@ class WidgetState(context: Context) {
         get() = prefs.getStringSet("expanded", emptySet())!!.toSet()
         set(v) = prefs.edit().putStringSet("expanded", v.toSet()).apply()
 
+    var failStreak: Int
+        get() = prefs.getInt("fail_streak", 0)
+        set(v) = prefs.edit().putInt("fail_streak", v).apply()
+
     fun toggleExpanded(key: String) {
         val s = expanded.toMutableSet()
         if (!s.add(key)) s.remove(key)
